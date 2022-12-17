@@ -37,8 +37,8 @@ if __name__ == '__main__':
 
     df = pd.DataFrame(data={'Country_Name': country_name_list, 'First_Letter': country_start_letter_list})
 
-    df_agg = df.groupby('First_Letter').nunique().reset_index()
-    df_agg = df_agg.sort_values('Country_Name', ascending=False)
+    df_agg = df.groupby('First_Letter')['Country_Name'].nunique().reset_index().sort_values('Country_Name',
+                                                                                            ascending=False)
 
     ax = sns.barplot(x='First_Letter',
                      y='Country_Name',
@@ -54,4 +54,3 @@ if __name__ == '__main__':
     # Show details of countries
     # starting with the most common initial letter
     show_country_details(df_agg['First_Letter'].iloc[0])
-
